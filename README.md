@@ -8,7 +8,7 @@ Some self-used Android utils.
 - DialogRootView
 - GlobalToast
 - SP
-- UrianAlyser
+- UriAnalyser
 
 
 ### License
