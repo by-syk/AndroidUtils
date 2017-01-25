@@ -85,7 +85,7 @@ public class GlobalToast {
 
     public static void copyAndShowToast(Context context, String msg, boolean isLong) {
         ExtraUtil.copy2Clipboard(context, msg);
-        showToast(context, msg, isLong);
+        showToast(context, context.getString(R.string.toast_copied, msg), isLong);
     }
 
     public static void copyAndShowToast(Context context, String msg) {
