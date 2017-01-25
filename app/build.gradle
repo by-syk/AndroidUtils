@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+
+    defaultConfig {
+        applicationId "com.by_syk.androidutils"
+        minSdkVersion 8
+        targetSdkVersion 25
+        versionCode 17012500
+        versionName "1.0.0.nightly"
+    }
+
+    buildTypes {
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    /*lintOptions {
+        disable 'MissingTranslation'
+    }*/
+}
+
+/*repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}*/
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile 'junit:junit:4.12'
+
+    compile project(path: ':aboutmsgrender')
+    compile project(path: ':chinesetraditionalfestivals')
+    compile project(path: ':dialogrootview')
+    compile project(path: ':globaltoast')
+    compile project(path: ':sp')
+    compile project(path: ':urianalyser')
+}

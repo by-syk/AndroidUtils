@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright 2017 By_syk
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin">
+
+            <Button
+                android:id="@+id/bt_aboutmsgrender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:text="AboutMsgRender" />
+
+            <Button
+                android:id="@+id/bt_chinesetraditionalfestivals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="ChineseTraditionalFestivals" />
+
+            <Button
+                android:id="@+id/bt_dialogrootview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="DialogRootView" />
+
+            <Button
+                android:id="@+id/bt_globaltoast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="GlobalToast" />
+
+            <Button
+                android:id="@+id/bt_sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="SP" />
+
+            <Button
+                android:id="@+id/bt_urianalysr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="UriAnalyser" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/unit_padding">
+
+        <TextView
+            android:id="@+id/tv_copyright"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/copyright"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textColor="@android:color/tertiary_text_dark"
+            android:gravity="center_horizontal" />
+
+    </FrameLayout>
+
+</LinearLayout>
