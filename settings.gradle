@@ -1,1 +1,1 @@
-include ':app', ':aboutmsgrender', ':chinesetraditionalfestivals', ':dialogrootview', ':globaltoast', ':sp', ':urianalyser'
+include ':app', ':aboutmsgrender', ':chinesetraditionalfestivals', ':dialogrootview', ':globaltoast', ':iconlineview', ':sp', ':urianalyser'

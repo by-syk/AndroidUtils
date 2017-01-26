@@ -65,6 +65,14 @@
                 android:text="GlobalToast" />
 
             <Button
+                android:id="@+id/bt_iconlineview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onMyClick"
+                android:layout_marginTop="@dimen/unit_padding"
+                android:text="IconLineView" />
+
+            <Button
                 android:id="@+id/bt_sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

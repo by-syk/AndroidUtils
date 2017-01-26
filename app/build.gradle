@@ -40,6 +40,7 @@ dependencies {
     compile project(path: ':chinesetraditionalfestivals')
     compile project(path: ':dialogrootview')
     compile project(path: ':globaltoast')
+    compile project(path: ':iconlineview')
     compile project(path: ':sp')
     compile project(path: ':urianalyser')
 }
