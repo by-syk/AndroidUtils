@@ -7,6 +7,7 @@ Some self-used Android utils.
 - ChineseTraditionalFestivals
 - DialogRootView
 - GlobalToast
+- IconLineView
 - SP
 - UriAnalyser
 
