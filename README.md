@@ -12,23 +12,22 @@ Some self-used Android utils.
 - UriAnalyser
 
 
-How to use?
-
+### How to use?
 
 Firstly, download and copy `globaltoast-1.1.2.aar` to `libs` directory in your project.
 
 Then add code below to `build.gradle`:
 ```
 repositories {
-  flatDir {
-    dirs 'libs'
-  }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
-  compile(name: 'globaltoast-1.1.2', ext: 'aar')
+    compile(name: 'globaltoast-1.1.2', ext: 'aar')
 }
 ```
 
