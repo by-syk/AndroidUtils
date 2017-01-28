@@ -32,6 +32,10 @@ import android.view.View;
 
 public class IconLineView extends View {
     private int color = 0xffff0000;
+    private int style = STYLE_0;
+
+    private static final int STYLE_0 = 0;
+    private static final int STYLE_1 = 1;
 
     public IconLineView(Context context) {
         this(context, null);
@@ -47,6 +51,7 @@ public class IconLineView extends View {
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.IconLineView);
         color = typedArray.getColor(R.styleable.IconLineView_color, 0xffff0000);
+        style = typedArray.getInteger(R.styleable.IconLineView_style, STYLE_0);
         typedArray.recycle();
     }
 
@@ -58,6 +63,12 @@ public class IconLineView extends View {
     }
 
     private void drawIconLine(Canvas canvas) {
+        Path path = initPath();
+        Paint paint = initPaint();
+        canvas.drawPath(path, paint);
+    }
+
+    private Path initPath() {
         float w = getWidth();
         float h = getHeight();
 
@@ -74,9 +85,18 @@ public class IconLineView extends View {
         path.lineTo(w / 2, h);
         path.moveTo(0, h / 2);
         path.lineTo(w, h / 2);
+        if (style == STYLE_1) {
+            path.moveTo(0, h / 8);
+            path.lineTo(w, h / 8);
+            path.moveTo(0, h * 7 / 8);
+            path.lineTo(w, h * 7 / 8);
+            path.moveTo(w / 8, 0);
+            path.lineTo(w / 8, h);
+            path.moveTo(w * 7 / 8, 0);
+            path.lineTo(w * 7 / 8, h);
+        }
 
-        Paint paint = initPaint();
-        canvas.drawPath(path, paint);
+        return path;
     }
 
     private Paint initPaint() {
