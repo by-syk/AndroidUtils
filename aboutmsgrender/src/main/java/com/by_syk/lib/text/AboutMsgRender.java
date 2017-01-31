@@ -56,7 +56,7 @@ public class AboutMsgRender {
         while (matcher.find()) {
             tagsList.add(matcher.group(1));
             tagsList.add(matcher.group(2));
-            newMsg = newMsg.replaceFirst("\\[(.*?)\\]\\((.*\\)*)\\)", matcher.group(1));
+            newMsg = newMsg.replaceFirst("\\[(.*?)\\]\\((.*?\\)*)\\)", matcher.group(1));
         }
 
         SpannableString spannableString = new SpannableString(newMsg);
