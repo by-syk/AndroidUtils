@@ -36,6 +36,7 @@ public class IconLineView extends View {
 
     private static final int STYLE_0 = 0;
     private static final int STYLE_1 = 1;
+    private static final int STYLE_2 = 2;
 
     public IconLineView(Context context) {
         this(context, null);
@@ -94,6 +95,15 @@ public class IconLineView extends View {
             path.lineTo(w / 8, h);
             path.moveTo(w * 7 / 8, 0);
             path.lineTo(w * 7 / 8, h);
+        } else if (style == STYLE_2) {
+            path.moveTo(0, h / 3);
+            path.lineTo(w, h / 3);
+            path.moveTo(0, h * 2 / 3);
+            path.lineTo(w, h * 2 / 3);
+            path.moveTo(w / 3, 0);
+            path.lineTo(w / 3, h);
+            path.moveTo(w * 2 / 3, 0);
+            path.lineTo(w * 2 / 3, h);
         }
 
         return path;
