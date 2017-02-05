@@ -36,10 +36,11 @@ public class IconGridView extends View {
     private boolean isDash = false;
     private int style = STYLE_UNION_JACK;
 
-    private static final int STYLE_CROSS = 0;
-    private static final int STYLE_UNION_JACK = 1;
-    private static final int STYLE_MATERIAL_LITE = 2;
-    private static final int STYLE_MATERIAL_FULL = 3;
+    private static final int STYLE_FRAME = 0;
+    private static final int STYLE_CROSS = 1;
+    private static final int STYLE_UNION_JACK = 2;
+    private static final int STYLE_MATERIAL_LITE = 3;
+    private static final int STYLE_MATERIAL_FULL = 4;
 
     public IconGridView(Context context) {
         this(context, null);
@@ -75,6 +76,8 @@ public class IconGridView extends View {
 
     private Path initPath() {
         switch (style) {
+            case STYLE_FRAME:
+                return initPathFrame();
             case STYLE_CROSS:
                 return initPathCross();
             case STYLE_UNION_JACK:
@@ -85,6 +88,16 @@ public class IconGridView extends View {
                 return initPathMaterialFull();
         }
         return initPathUnionJack();
+    }
+
+    private Path initPathFrame() {
+        float w = getWidth();
+        float h = getHeight();
+
+        Path path = new Path();
+        path.addRect(new RectF(0, 0, w, h), Path.Direction.CW);
+
+        return path;
     }
 
     private Path initPathCross() {
