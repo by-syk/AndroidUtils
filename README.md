@@ -7,7 +7,7 @@ Some self-used Android utils.
 - ChineseTraditionalFestivals
 - DialogRootView
 - GlobalToast
-- IconLineView
+- IconGridView
 - SP
 - UriAnalyser
 
@@ -19,9 +19,7 @@ Firstly, download and copy `globaltoast-1.1.2.aar` to `libs` directory in your p
 Then add code below to `build.gradle`:
 ```
 repositories {
-    flatDir {
-        dirs 'libs'
-    }
+    flatDir { dirs 'libs' }
 }
 
 dependencies {
