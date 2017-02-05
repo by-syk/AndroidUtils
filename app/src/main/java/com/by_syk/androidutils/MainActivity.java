@@ -17,6 +17,7 @@
 package com.by_syk.androidutils;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -49,6 +50,9 @@ public class MainActivity extends Activity {
                 break;
             case R.id.bt_globaltoast:
                 GlobalToast.showToast(this, R.string.app_name);
+                break;
+            case R.id.bt_icongridview:
+                startActivity(new Intent(this, IconGridActivity.class));
                 break;
             case R.id.bt_sp:
 

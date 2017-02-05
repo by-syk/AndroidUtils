@@ -17,9 +17,6 @@
 
 <resources>
 
-    <declare-styleable name="IconLineView">
-        <attr name="color" format="color" />
-        <attr name="style" format="integer" />
-    </declare-styleable>
+    <string name="app_name">IconGridView</string>
 
 </resources>
