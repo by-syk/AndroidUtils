@@ -34,12 +34,12 @@ import android.view.View;
 public class IconGridView extends View {
     private int color = 0x80808080;
     private boolean isDash = false;
-    private int gridStyle = GRID_STYLE_UNION_JACK;
+    private int style = STYLE_UNION_JACK;
 
-    private static final int GRID_STYLE_CROSS = 0;
-    private static final int GRID_STYLE_UNION_JACK = 1;
-    private static final int GRID_STYLE_MATERIAL_LITE = 2;
-    private static final int GRID_STYLE_MATERIAL_FULL = 3;
+    private static final int STYLE_CROSS = 0;
+    private static final int STYLE_UNION_JACK = 1;
+    private static final int STYLE_MATERIAL_LITE = 2;
+    private static final int STYLE_MATERIAL_FULL = 3;
 
     public IconGridView(Context context) {
         this(context, null);
@@ -54,9 +54,9 @@ public class IconGridView extends View {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.IconGridView);
-        color = typedArray.getColor(R.styleable.IconGridView_color, 0xffff0000);
-        isDash = typedArray.getBoolean(R.styleable.IconGridView_dash, false);
-        gridStyle = typedArray.getInteger(R.styleable.IconGridView_gridStyle, GRID_STYLE_UNION_JACK);
+        color = typedArray.getColor(R.styleable.IconGridView_igColor, 0xffff0000);
+        isDash = typedArray.getBoolean(R.styleable.IconGridView_igDash, false);
+        style = typedArray.getInteger(R.styleable.IconGridView_igStyle, STYLE_UNION_JACK);
         typedArray.recycle();
     }
 
@@ -74,14 +74,14 @@ public class IconGridView extends View {
     }
 
     private Path initPath() {
-        switch (gridStyle) {
-            case GRID_STYLE_CROSS:
+        switch (style) {
+            case STYLE_CROSS:
                 return initPathCross();
-            case GRID_STYLE_UNION_JACK:
+            case STYLE_UNION_JACK:
                 return initPathUnionJack();
-            case GRID_STYLE_MATERIAL_LITE:
+            case STYLE_MATERIAL_LITE:
                 return initPathMaterialLite();
-            case GRID_STYLE_MATERIAL_FULL:
+            case STYLE_MATERIAL_FULL:
                 return initPathMaterialFull();
         }
         return initPathUnionJack();

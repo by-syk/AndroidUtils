@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="cross"
+                app:igDash="false"
+                app:igColor="#ffff0000" />
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="cross"
+                app:igDash="true"
+                app:igColor="#ffff0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="unionJack"
+                app:igDash="false"
+                app:igColor="#ffff0000" />
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="unionJack"
+                app:igDash="true"
+                app:igColor="#ffff0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="materialLite"
+                app:igDash="false"
+                app:igColor="#ffff0000" />
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="materialLite"
+                app:igDash="true"
+                app:igColor="#ffff0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="materialFull"
+                app:igDash="false"
+                app:igColor="#ffff0000" />
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                app:igStyle="materialFull"
+                app:igDash="true"
+                app:igColor="#ffff0000" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_margin="8dp"
+                android:background="@android:color/black"
+                app:igStyle="materialFull"
+                app:igDash="false"
+                app:igColor="#80808080" />
+
+            <com.by_syk.lib.view.IconGridView
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:background="@android:color/white"
+                android:layout_margin="8dp"
+                app:igStyle="materialFull"
+                app:igDash="true"
+                app:igColor="#80808080" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
