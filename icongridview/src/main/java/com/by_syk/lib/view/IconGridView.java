@@ -55,7 +55,7 @@ public class IconGridView extends View {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs,
                 R.styleable.IconGridView);
-        color = typedArray.getColor(R.styleable.IconGridView_igColor, 0xffff0000);
+        color = typedArray.getColor(R.styleable.IconGridView_igColor, 0x80808080);
         isDash = typedArray.getBoolean(R.styleable.IconGridView_igDash, false);
         style = typedArray.getInteger(R.styleable.IconGridView_igStyle, STYLE_UNION_JACK);
         typedArray.recycle();
