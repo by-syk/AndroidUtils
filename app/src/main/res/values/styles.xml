@@ -18,5 +18,6 @@
 <resources>
 
     <style name="AppTheme" parent="@android:style/Theme.Black" />
+    <style name="AppThemeLight" parent="@android:style/Theme.Light" />
 
 </resources>

@@ -28,12 +28,16 @@ import android.util.TypedValue;
 import android.view.View;
 
 /**
+ * How do we create the IconGridView? What's the grids and keylines?
+ * View it here: https://material.io/guidelines/style/icons.html
+ *
  * Created by By_syk on 2017-01-26.
  */
 
 public class IconGridView extends View {
     private int color = 0x80808080;
     private boolean isDash = false;
+    private boolean withGrids = false;
     private int style = STYLE_UNION_JACK;
 
     private static final int STYLE_FRAME = 0;
@@ -57,6 +61,7 @@ public class IconGridView extends View {
                 R.styleable.IconGridView);
         color = typedArray.getColor(R.styleable.IconGridView_igColor, 0x80808080);
         isDash = typedArray.getBoolean(R.styleable.IconGridView_igDash, false);
+        withGrids = typedArray.getBoolean(R.styleable.IconGridView_igWithGrids, false);
         style = typedArray.getInteger(R.styleable.IconGridView_igStyle, STYLE_UNION_JACK);
         typedArray.recycle();
     }
@@ -65,13 +70,20 @@ public class IconGridView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        drawIconLine(canvas);
+        drawKeylines(canvas);
     }
 
-    private void drawIconLine(Canvas canvas) {
+    private void drawKeylines(Canvas canvas) {
         Path path = initPath();
         Paint paint = initPaint();
         canvas.drawPath(path, paint);
+
+        if (withGrids) {
+            path = initPathGrids();
+            paint = initPaint();
+            paint.setAlpha(paint.getAlpha() * 50 / 100);
+            canvas.drawPath(path, paint);
+        }
     }
 
     private Path initPath() {
@@ -138,6 +150,8 @@ public class IconGridView extends View {
     private Path initPathMaterialLite() {
         float w = getWidth();
         float h = getHeight();
+        float unitW = w / 24;
+        float unitH = h / 24;
 
         Path path = new Path();
         path.addRect(new RectF(0, 0, w, h), Path.Direction.CW);
@@ -152,21 +166,34 @@ public class IconGridView extends View {
         path.moveTo(w, 0);
         path.lineTo(0, h);
 
-        path.moveTo(0, h * 2 / 24);
-        path.lineTo(w, h * 2 / 24);
-        path.moveTo(0, h * 22 / 24);
-        path.lineTo(w, h * 22 / 24);
-        path.moveTo(w * 2 / 24, 0);
-        path.lineTo(w * 2 / 24, h);
-        path.moveTo(w * 22 / 24, 0);
-        path.lineTo(w * 22 / 24, h);
+        path.moveTo(0, unitH * 2);
+        path.lineTo(w, unitH * 2);
+        path.moveTo(0, unitH * 22);
+        path.lineTo(w, unitH * 22);
+        path.moveTo(unitH * 2, 0);
+        path.lineTo(unitH * 2, h);
+        path.moveTo(unitH * 22, 0);
+        path.lineTo(unitH * 22, h);
 
         return path;
     }
 
+    /**
+     * Android expects product icons to be provided at 48dp, with edges at 1dp.
+     * When you create the icon, maintain the 48-unit measure, but scale it to 400% at 192x192dp
+     * (the edge becomes 4dp).
+     *
+     * Keyline Shapes:
+     *   + Rectangles: 152x152dp (Square), 176x128dp (Landscape), 128x176dp (Portrait)
+     *     + 12dp Radius rounded corners
+     *   + Circle: 176x176dp
+     * Maximum Area: 176x176dp
+     */
     private Path initPathMaterialFull() {
         float w = getWidth();
         float h = getHeight();
+        float unitW = w / 48;
+        float unitH = h / 48;
 
         Path path = new Path();
         path.addRect(new RectF(0, 0, w, h), Path.Direction.CW);
@@ -181,23 +208,41 @@ public class IconGridView extends View {
         path.moveTo(w, 0);
         path.lineTo(0, h);
 
-        path.moveTo(0, h * 17 / 48);
-        path.lineTo(w, h * 17 / 48);
-        path.moveTo(0, h * 31 / 48);
-        path.lineTo(w, h * 31 / 48);
-        path.moveTo(w * 17 / 48, 0);
-        path.lineTo(w * 17 / 48, h);
-        path.moveTo(w * 31 / 48, 0);
-        path.lineTo(w * 31 / 48, h);
+        path.moveTo(0, unitH * 17);
+        path.lineTo(w, unitH * 17);
+        path.moveTo(0, unitH * 31);
+        path.lineTo(w, unitH * 31);
+        path.moveTo(unitW * 17, 0);
+        path.lineTo(unitW * 17, h);
+        path.moveTo(unitW * 31, 0);
+        path.lineTo(unitW * 31, h);
 
-        path.addRoundRect(new RectF(w * 5 / 48, h * 5 / 48, w * 43 / 48, h * 43 / 48),
-                w * 3 / 48, h * 3 / 48, Path.Direction.CW);
-        path.addRoundRect(new RectF(w * 2 / 48, h * 8 / 48, w * 46 / 48, h * 40 / 48),
-                w * 3 / 48, h * 3 / 48, Path.Direction.CW);
-        path.addRoundRect(new RectF(w * 8 / 48, h * 2 / 48, w * 40 / 48, h * 46 / 48),
-                w * 3 / 48, h * 3 / 48, Path.Direction.CW);
-        path.addCircle(w / 2, h / 2, w * 22 / 48, Path.Direction.CW);
-        path.addCircle(w / 2, h / 2, w * 10 / 48, Path.Direction.CW);
+        path.addRoundRect(new RectF(unitW * 5, unitH * 5, unitW * 43, unitH * 43),
+                unitW * 3, unitH * 3, Path.Direction.CW);
+        path.addRoundRect(new RectF(unitW * 2, unitH * 8, unitW * 46, unitH * 40),
+                unitW * 3, unitH * 3, Path.Direction.CW);
+        path.addRoundRect(new RectF(unitW * 8, unitH * 2, unitW * 40, unitH * 46),
+                unitW * 3, unitH * 3, Path.Direction.CW);
+        path.addCircle(w / 2, h / 2, unitW * 22, Path.Direction.CW);
+        path.addCircle(w / 2, h / 2, unitW * 10, Path.Direction.CW);
+
+        return path;
+    }
+
+    private Path initPathGrids() {
+        float w = getWidth();
+        float h = getHeight();
+        float unitW = w / 48;
+        float unitH = h / 48;
+
+        Path path = new Path();
+
+        for (int i = 0; i < 48; ++i) {
+            path.moveTo(0, unitH * i);
+            path.lineTo(w, unitH * i);
+            path.moveTo(unitW * i, 0);
+            path.lineTo(unitW * i, h);
+        }
 
         return path;
     }

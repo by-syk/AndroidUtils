@@ -24,14 +24,16 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.by_syk.androidutils.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".IconGridActivity" />
+        <activity
+            android:name=".IconGridActivity"
+            android:label="IconGridView" />
 
     </application>
 

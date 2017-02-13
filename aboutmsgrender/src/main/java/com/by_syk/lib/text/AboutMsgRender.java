@@ -16,12 +16,14 @@
 
 package com.by_syk.lib.text;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.by_syk.lib.toast.GlobalToast;
@@ -31,23 +33,36 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import moe.feng.alipay.zerosdk.AlipayZeroSdk;
+
 /**
  * Created by By_syk on 2017-01-14.
  */
 
 public class AboutMsgRender {
     /**
-     * 渲染 APP 的文字关于信息，支持类似 Markdown 的标记：
-     * [xxx](copy:xxx)
-     * [xxx](email:xxx)
-     * [xxx](xxx)
+     * 渲染 APP 的文字关于信息，支持类似 Markdown 的标记。
      *
-     * @param CONTEXT
+     * 实现点按复制：
+     * [要显示文字](copy:要复制的文字)
+     *
+     * 实现点按发邮件：
+     * [要显示文字](email:邮箱地址)
+     *
+     * 实现点按跳转支付宝转账页面（如果失败但有账号，则复制账号）：
+     * [要显示文字](alipay:二维码ID|可选填的支付宝账号)
+     * 如何获取支付宝二维码ID？
+     * 由于此处使用了 fython 开源的 AlipayZeroSdk 项目，请参考：https://github.com/fython/AlipayZeroSdk
+     *
+     * 实现点按跳转链接（比如 http、mailto）：
+     * [要显示文字](链接URL)
+     *
+     * @param ACTIVITY
      * @param msg
      * @param underline 是否去掉链接的下划线
      * @return
      */
-    public static SpannableString render(final Context CONTEXT, String msg, boolean underline) {
+    public static SpannableString render(final Activity ACTIVITY, String msg, boolean underline) {
         String newMsg = msg;
         final List<String> tagsList = new ArrayList<>();
 
@@ -60,28 +75,47 @@ public class AboutMsgRender {
         }
 
         SpannableString spannableString = new SpannableString(newMsg);
-        int temp_pos = -1;
+        int tempPos = -1;
         for (int i = 0, len = tagsList.size(); i < len - 1; i += 2) {
-            temp_pos = newMsg.indexOf(tagsList.get(i), temp_pos + 1);
+            tempPos = newMsg.indexOf(tagsList.get(i), tempPos + 1);
             if (tagsList.get(i + 1).startsWith("copy:")) {
                 final String TEXT = tagsList.get(i + 1).substring(5);
                 spannableString.setSpan(new MyClickableSpan(underline) {
                     @Override
                     public void onClick(View widget) {
-                        GlobalToast.copyAndShowToast(CONTEXT, TEXT);
+                        GlobalToast.copyAndShowToast(ACTIVITY, TEXT);
                     }
-                }, temp_pos, temp_pos + tagsList.get(i).length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                }, tempPos, tempPos + tagsList.get(i).length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
             } else if (tagsList.get(i + 1).startsWith("email:")) {
                 final String TEXT = tagsList.get(i + 1).substring(6);
                 spannableString.setSpan(new MyClickableSpan(underline) {
                     @Override
                     public void onClick(View widget) {
-                        sendEmail(CONTEXT, TEXT);
+                        sendEmail(ACTIVITY, TEXT);
                     }
-                }, temp_pos, temp_pos + tagsList.get(i).length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+                }, tempPos, tempPos + tagsList.get(i).length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            } else if (tagsList.get(i + 1).startsWith("alipay:")) {
+                String[] arr = tagsList.get(i + 1).substring(7).split("\\|", -1);
+                final String QRCODE_ID = arr[0];
+                final String ACCOUNT;
+                if (arr.length > 1) {
+                    ACCOUNT = arr[1];
+                } else {
+                    ACCOUNT = "";
+                }
+                spannableString.setSpan(new MyClickableSpan(underline) {
+                    @Override
+                    public void onClick(View widget) {
+                        if (!TextUtils.isEmpty(QRCODE_ID) && AlipayZeroSdk.hasInstalledAlipayClient(ACTIVITY)
+                                && AlipayZeroSdk.startAlipayClient(ACTIVITY, QRCODE_ID)) {
+                        } else if (!TextUtils.isEmpty(ACCOUNT)) {
+                            GlobalToast.copyAndShowToast(ACTIVITY, ACCOUNT);
+                        }
+                    }
+                }, tempPos, tempPos + tagsList.get(i).length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
             } else {
                 spannableString.setSpan(new MyURLSpan(tagsList.get(i + 1), underline),
-                        temp_pos, temp_pos + tagsList.get(i).length(),
+                        tempPos, tempPos + tagsList.get(i).length(),
                         Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
             }
         }
@@ -90,10 +124,10 @@ public class AboutMsgRender {
     }
 
     /**
-     * @see #render(Context, String, boolean)
+     * @see #render(Activity, String, boolean)
      */
-    public static SpannableString render(final Context CONTEXT, String msg) {
-        return render(CONTEXT, msg, true);
+    public static SpannableString render(Activity activity, String msg) {
+        return render(activity, msg, true);
     }
 
     /**

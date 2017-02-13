@@ -20,6 +20,7 @@
     <declare-styleable name="IconGridView">
         <attr name="igColor" format="color" />
         <attr name="igDash" format="boolean" />
+        <attr name="igWithGrids" format="boolean" />
         <attr name="igStyle" format="integer">
             <enum name="frame" value="0" />
             <enum name="cross" value="1" />

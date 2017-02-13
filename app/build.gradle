@@ -43,5 +43,5 @@ dependencies {
     compile project(path: ':sp')
     compile project(path: ':urianalyser')
 
-    compile project(path: ':quickscroll')
+//    compile project(path: ':quickscroll')
 }
