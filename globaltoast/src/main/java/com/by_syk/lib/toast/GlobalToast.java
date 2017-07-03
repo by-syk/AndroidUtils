@@ -17,12 +17,12 @@
 package com.by_syk.lib.toast;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.widget.Toast;
 
 /**
  * Created by By_syk on 2016-03-11.
  */
+
 public class GlobalToast {
     private static Toast toast = null;
 
@@ -55,40 +55,66 @@ public class GlobalToast {
         toast.show();
     }
 
-    public static void showToast(Context context, String msg, boolean isLong) {
-        showToast(context, msg, isLong, -1);
-    }
-
     public static void showToast(Context context, String msg, int gravity) {
         showToast(context, msg, false, gravity);
     }
 
-    public static void showToast(Context context, String msg) {
-        showToast(context, msg, false);
+    public static void showLongToast(Context context, String msg, int gravity) {
+        showToast(context, msg, true, gravity);
     }
 
+    @Deprecated
+    public static void showToast(Context context, String msg, boolean isLong) {
+        showToast(context, msg, isLong, -1);
+    }
+
+    public static void showToast(Context context, String msg) {
+        showToast(context, msg, -1);
+    }
+
+    public static void showLongToast(Context context, String msg) {
+        showLongToast(context, msg, -1);
+    }
+
+    @Deprecated
     public static void showToast(Context context, int strId, boolean isLong, int gravity) {
         showToast(context, context.getString(strId), isLong, gravity);
-    }
-
-    public static void showToast(Context context, int strId, boolean isLong) {
-        showToast(context, context.getString(strId), isLong);
     }
 
     public static void showToast(Context context, int strId, int gravity) {
         showToast(context, context.getString(strId), gravity);
     }
 
+    public static void showLongToast(Context context, int strId, int gravity) {
+        showToast(context, context.getString(strId), true, gravity);
+    }
+
+    @Deprecated
+    public static void showToast(Context context, int strId, boolean isLong) {
+        showToast(context, context.getString(strId), isLong);
+    }
+
     public static void showToast(Context context, int strId) {
         showToast(context, context.getString(strId));
     }
 
+    public static void showLongToast(Context context, int strId) {
+        showLongToast(context, context.getString(strId), -1);
+    }
+
+    @Deprecated
     public static void copyAndShowToast(Context context, String msg, boolean isLong) {
         ExtraUtil.copy2Clipboard(context, msg);
         showToast(context, context.getString(R.string.toast_copied, msg), isLong);
     }
 
     public static void copyAndShowToast(Context context, String msg) {
-        copyAndShowToast(context, msg, false);
+        ExtraUtil.copy2Clipboard(context, msg);
+        showToast(context, context.getString(R.string.toast_copied, msg));
+    }
+
+    public static void copyAndShowLongToast(Context context, String msg) {
+        ExtraUtil.copy2Clipboard(context, msg);
+        showLongToast(context, context.getString(R.string.toast_copied, msg));
     }
 }
